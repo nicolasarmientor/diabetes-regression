@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Diabetes Regression Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link href="/static/css/style.css" rel="stylesheet">
+  <link href="/static/favicon.png" rel="icon">
+</head>
+<body>
+  <header>
+    <h1>Diabetes Regression Results</h1>
+  </header>
+
+  <main class="grid-root">
+    <div class="grid">
+      
+      <section class="card">
+        <h2>Model Metrics (JSON)</h2>
+        <pre id="json-view" class="codeblock">Loading…</pre>
+        <p><a href="/static/results/linear_model_results.json" target="_blank">Open raw JSON</a></p>
+      </section>
+
+      <section class="card">
+        <h2>PDF Preview</h2>
+        <object
+          data="/static/results/diabetes_regression_results.pdf#zoom=80"
+          type="application/pdf"
+          width="100%" height="500">
+          <p>PDF preview not supported.
+            <a href="/static/results/diabetes_regression_results.pdf" target="_blank">Open the PDF</a>.
+          </p>
+        </object>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    async function loadJSON() {
+      const pre = document.getElementById("json-view");
+      try {
+        const res = await fetch("/api/results", { cache: "no-store" });
+        if (!res.ok) { pre.textContent = "JSON not found."; return; }
+        const data = await res.json();
+        pre.textContent = JSON.stringify(data, null, 2);
+      } catch (e) {
+        pre.textContent = "Error loading JSON.";
+        console.error(e);
+      }
+    }
+    loadJSON();
+  </script>
+</body>
+</html>
