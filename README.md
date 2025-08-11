@@ -1,4 +1,4 @@
-# Diabetes Process Prediction Using Linear Regression Models 🤖
+# Diabetes Progress Prediction Using Linear Regression Models 🤖
 A FastAPI-based web application that trains multiple regression models on a Diabetes dataset, evaluates them, and displays both the JSON results and a PDF report with visualizations.
 
 ---
